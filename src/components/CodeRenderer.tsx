@@ -4,9 +4,11 @@ import { Highlight, themes } from 'prism-react-renderer';
 
 interface CodeRendererProps {
   code: string;
+  copyLabel?: string;
+  copiedLabel?: string;
 }
 
-export default function CodeRenderer({ code }: CodeRendererProps) {
+export default function CodeRenderer({ code, copyLabel = 'Copy', copiedLabel = 'Copied!' }: CodeRendererProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -34,12 +36,12 @@ export default function CodeRenderer({ code }: CodeRendererProps) {
           {copied ? (
             <>
               <Check className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-emerald-400">Copied!</span>
+              <span className="text-emerald-400">{copiedLabel}</span>
             </>
           ) : (
             <>
               <Copy className="w-3.5 h-3.5" />
-              <span>Copy</span>
+              <span>{copyLabel}</span>
             </>
           )}
         </button>
