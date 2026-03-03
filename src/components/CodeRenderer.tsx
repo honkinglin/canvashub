@@ -20,16 +20,16 @@ export default function CodeRenderer({ code }: CodeRendererProps) {
   };
 
   return (
-    <div className="relative group rounded-xl overflow-hidden bg-slate-950 border border-slate-800">
-      <div className="flex items-center justify-between px-4 py-2 bg-slate-900/50 border-b border-slate-800">
+    <div className="relative group rounded-2xl overflow-hidden bg-[#0b1220] border border-black/10 shadow-[0_8px_30px_rgba(15,23,42,0.2)]">
+      <div className="flex items-center justify-between px-4 py-2 bg-[#111827] border-b border-white/10">
         <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-slate-700"></div>
-          <div className="w-3 h-3 rounded-full bg-slate-700"></div>
-          <div className="w-3 h-3 rounded-full bg-slate-700"></div>
+          <div className="w-3 h-3 rounded-full bg-[#f97316]"></div>
+          <div className="w-3 h-3 rounded-full bg-[#facc15]"></div>
+          <div className="w-3 h-3 rounded-full bg-[#22c55e]"></div>
         </div>
         <button
           onClick={handleCopy}
-          className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-medium bg-slate-800/50 hover:bg-slate-700/50 px-2.5 py-1 rounded-md"
+          className="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-medium bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-md"
         >
           {copied ? (
             <>

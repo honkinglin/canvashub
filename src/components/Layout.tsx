@@ -3,22 +3,24 @@ import { Github } from 'lucide-react';
 
 export default function Layout() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-slate-950/80 backdrop-blur-md">
+    <div className="min-h-screen flex flex-col relative">
+      <div className="soft-dot w-64 h-64 bg-[#9ec4ff] -top-12 -left-10" />
+      <div className="soft-dot w-72 h-72 bg-[#ffc2a8] top-10 right-0" />
+      <header className="sticky top-0 z-50 w-full border-b border-black/5 bg-white/65 backdrop-blur-xl">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 text-white hover:text-blue-400 transition-colors">
+          <Link to="/" className="flex items-center gap-3 text-[#141414] hover:text-[#0864ef] transition-colors">
             <img src="/logo.png" alt="CanvasHub Logo" className="w-8 h-8 rounded" />
-            <span className="font-bold text-xl tracking-tight">CanvasHub</span>
+            <span className="font-semibold text-xl tracking-tight">CanvasHub</span>
           </Link>
-          <nav className="flex items-center gap-6">
-            <Link to="/" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+          <nav className="flex items-center gap-3">
+            <Link to="/" className="text-sm font-semibold text-[#334155] hover:text-[#0864ef] transition-colors">
               Gallery
             </Link>
             <a 
               href="https://github.com/honkinglin/canvashub" 
               target="_blank" 
               rel="noreferrer"
-              className="text-slate-400 hover:text-white transition-colors"
+              className="text-[#475569] hover:text-[#141414] transition-colors bg-black/5 hover:bg-black/10 p-2 rounded-full"
             >
               <Github className="w-5 h-5" />
             </a>

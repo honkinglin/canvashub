@@ -1,23 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-canvas-bg: #030712;
-  --color-panel-bg: rgba(15, 23, 42, 0.7);
-  --color-panel-border: rgba(51, 65, 85, 0.5);
-  --color-accent: #3b82f6;
+  --color-canvas-bg: #f7f6f2;
+  --color-text-main: #161616;
+  --color-text-muted: #4c545b;
+  --color-card-bg: rgba(255, 255, 255, 0.8);
+  --color-card-border: rgba(22, 22, 22, 0.08);
+  --color-accent: #0864ef;
+  --color-accent-soft: #b6d4ff;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   background-color: var(--color-canvas-bg);
-  color: #f8fafc;
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: var(--color-text-main);
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
 }
 
-/* Custom scrollbar for modern feel */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 14% 20%, rgba(6, 100, 239, 0.18), transparent 40%),
+    radial-gradient(circle at 84% 14%, rgba(255, 120, 75, 0.2), transparent 34%),
+    radial-gradient(circle at 65% 82%, rgba(0, 170, 138, 0.18), transparent 40%),
+    linear-gradient(140deg, #fbfaf7 0%, #f4f7fb 44%, #f8f3ec 100%);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.display-title {
+  font-family: "Playfair Display", Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+.glass-panel {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: reveal-up 0.55s ease-out forwards;
+}
+
+.soft-dot {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(50px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+@keyframes reveal-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -26,9 +80,9 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #bcc3ce;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #8f97a3;
 }
