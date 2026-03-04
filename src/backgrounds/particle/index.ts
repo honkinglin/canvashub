@@ -1,6 +1,6 @@
-import type { BackgroundModule, CanvasRenderFunction } from '../../types';
+import type { BackgroundModule, CanvasRenderFunction, ConfigRecord } from '../../types';
 
-export interface ParticleConfig {
+export interface ParticleConfig extends ConfigRecord {
   particleCount: number;
   speed: number;
   connectionDistance: number;

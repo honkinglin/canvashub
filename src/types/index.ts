@@ -1,4 +1,6 @@
 export type ConfigType = 'number' | 'range' | 'color' | 'boolean' | 'select';
+export type ConfigValue = number | string | boolean;
+export type ConfigRecord = Record<string, ConfigValue>;
 
 export interface ConfigOptions {
   min?: number;
@@ -14,13 +16,13 @@ export interface ConfigSchemaItem {
   options?: ConfigOptions;
 }
 
-export type CanvasRenderFunction<T = Record<string, any>> = (
+export type CanvasRenderFunction<T = ConfigRecord> = (
   canvas: HTMLCanvasElement,
   ctx: CanvasRenderingContext2D,
   config: T
 ) => { cleanup: () => void; updateConfig: (newConfig: T) => void };
 
-export interface BackgroundModule<T = Record<string, any>> {
+export interface BackgroundModule<T = ConfigRecord> {
   id: string;
   name: string;
   description: string;

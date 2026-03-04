@@ -2,9 +2,8 @@ import { particleModule } from './particle';
 import { waveModule } from './wave';
 import { gradientModule } from './gradient';
 import { cursorTrailModule } from './cursorTrail';
-import type { BackgroundModule } from '../types';
 
-export const backgrounds: BackgroundModule<any>[] = [
+export const backgrounds = [
   particleModule,
   waveModule,
   gradientModule,

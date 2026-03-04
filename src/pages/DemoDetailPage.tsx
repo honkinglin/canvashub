@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Settings2, Code, LayoutTemplate } from 'lucide-react';
 import { getBackgroundById } from '../backgrounds';
@@ -7,36 +7,24 @@ import ConfigPanel from '../components/ConfigPanel';
 import CodeRenderer from '../components/CodeRenderer';
 import { getBackgroundLocalized, localeText } from '../i18n';
 import { useUI } from '../ui/UIContext';
+import type { CanvasRenderFunction, ConfigRecord, ConfigValue } from '../types';
 
-export default function DemoDetailPage() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const bgModule = getBackgroundById(id || '');
-  const { language } = useUI();
-  const text = localeText[language];
-
-  const [config, setConfig] = useState<Record<string, any>>({});
+function DemoDetailContent({
+  bgModule,
+  language,
+  text,
+  navigate,
+}: {
+  bgModule: NonNullable<ReturnType<typeof getBackgroundById>>;
+  language: 'zh' | 'en';
+  text: (typeof localeText)['zh'];
+  navigate: ReturnType<typeof useNavigate>;
+}) {
+  const [config, setConfig] = useState<ConfigRecord>({ ...(bgModule.defaultConfig as ConfigRecord) });
   const [activeTab, setActiveTab] = useState<'config' | 'code'>('config');
 
-  useEffect(() => {
-    if (bgModule) {
-      setConfig(bgModule.defaultConfig);
-    }
-  }, [bgModule]);
-
-  if (!bgModule) {
-    return (
-      <div className="flex flex-col items-center justify-center h-[60vh]">
-        <h2 className="text-2xl font-bold mb-4 text-[var(--text-main)]">{text.notFoundTitle}</h2>
-        <button onClick={() => navigate('/')} className="text-blue-500 hover:text-blue-400 font-semibold">
-          {text.notFoundButton}
-        </button>
-      </div>
-    );
-  }
-
-  const handleConfigChange = (key: string, value: any) => {
-    setConfig(prev => ({ ...prev, [key]: value }));
+  const handleConfigChange = (key: string, value: ConfigValue) => {
+    setConfig((prev) => ({ ...prev, [key]: value }));
   };
 
   const localized = getBackgroundLocalized(language, bgModule.id, bgModule.name, bgModule.description);
@@ -44,12 +32,10 @@ export default function DemoDetailPage() {
   return (
     <div className="h-[calc(100vh-64px)] flex flex-col lg:flex-row relative">
       <div className="flex-1 relative overflow-hidden order-2 lg:order-1 h-[52vh] lg:h-full bg-[#0f172a]">
-        {Object.keys(config).length > 0 && (
-          <CanvasBackground 
-            config={config} 
-            renderFn={bgModule.render} 
-          />
-        )}
+        <CanvasBackground 
+          config={config} 
+          renderFn={bgModule.render as CanvasRenderFunction<ConfigRecord>}
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
         <div className="absolute left-5 bottom-5 md:left-8 md:bottom-8 pointer-events-none">
           <h2 className="display-title text-2xl md:text-4xl text-white mb-2">{localized.name}</h2>
@@ -111,11 +97,36 @@ export default function DemoDetailPage() {
               <p className="text-sm ui-muted">
                 {text.codeHint}
               </p>
-              <CodeRenderer code={bgModule.generateCode(config as any)} copyLabel={text.detailCopy} copiedLabel={text.detailCopied} />
+              <CodeRenderer
+                code={(bgModule.generateCode as (value: ConfigRecord) => string)(config)}
+                copyLabel={text.detailCopy}
+                copiedLabel={text.detailCopied}
+              />
             </div>
           )}
         </div>
       </div>
     </div>
   );
+}
+
+export default function DemoDetailPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const bgModule = getBackgroundById(id || '');
+  const { language } = useUI();
+  const text = localeText[language];
+
+  if (!bgModule) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[60vh]">
+        <h2 className="text-2xl font-bold mb-4 text-[var(--text-main)]">{text.notFoundTitle}</h2>
+        <button onClick={() => navigate('/')} className="text-blue-500 hover:text-blue-400 font-semibold">
+          {text.notFoundButton}
+        </button>
+      </div>
+    );
+  }
+
+  return <DemoDetailContent key={bgModule.id} bgModule={bgModule} language={language} text={text} navigate={navigate} />;
 }

@@ -1,6 +1,6 @@
-import type { BackgroundModule, CanvasRenderFunction } from '../../types';
+import type { BackgroundModule, CanvasRenderFunction, ConfigRecord } from '../../types';
 
-export interface GradientConfig {
+export interface GradientConfig extends ConfigRecord {
   color1: string;
   color2: string;
   color3: string;

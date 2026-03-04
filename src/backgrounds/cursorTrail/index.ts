@@ -1,6 +1,6 @@
-import type { BackgroundModule, CanvasRenderFunction } from '../../types';
+import type { BackgroundModule, CanvasRenderFunction, ConfigRecord } from '../../types';
 
-export interface CursorTrailConfig {
+export interface CursorTrailConfig extends ConfigRecord {
   backgroundColor: string;
   particleColor: string;
   particleCount: number;

@@ -1,6 +1,6 @@
-import type { BackgroundModule, CanvasRenderFunction } from '../../types';
+import type { BackgroundModule, CanvasRenderFunction, ConfigRecord } from '../../types';
 
-export interface WaveConfig {
+export interface WaveConfig extends ConfigRecord {
   waveCount: number;
   amplitude: number;
   frequency: number;
@@ -55,7 +55,7 @@ const render: CanvasRenderFunction<WaveConfig> = (canvas, ctx, initialConfig) =>
       
       ctx.fillStyle = 'rgba(' + r + ', ' + g + ', ' + b + ', 0.5)';
       
-      let startY = height / 2 + (i * 20 - (config.waveCount * 10));
+      const startY = height / 2 + (i * 20 - (config.waveCount * 10));
 
       ctx.moveTo(0, height);
       ctx.lineTo(0, startY);

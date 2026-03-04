@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
-import type { CanvasRenderFunction } from '../types';
+import type { CanvasRenderFunction, ConfigRecord } from '../types';
 
-interface CanvasBackgroundProps<T = any> {
+interface CanvasBackgroundProps<T = ConfigRecord> {
   config: T;
   renderFn: CanvasRenderFunction<T>;
   className?: string;
@@ -18,7 +18,7 @@ export default function CanvasBackground<T>({ config, renderFn, className = '' }
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let resizeObserver = new ResizeObserver((entries) => {
+    const resizeObserver = new ResizeObserver((entries) => {
       if (!entries.length || !entries[0].target) return;
       const target = entries[0].target as HTMLElement;
       const dpr = window.devicePixelRatio || 1;

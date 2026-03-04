@@ -3,6 +3,7 @@ import { backgrounds } from '../backgrounds';
 import CanvasBackground from '../components/CanvasBackground';
 import { getBackgroundLocalized, localeText } from '../i18n';
 import { useUI } from '../ui/UIContext';
+import type { CanvasRenderFunction, ConfigRecord } from '../types';
 
 export default function GalleryPage() {
   const { language } = useUI();
@@ -35,8 +36,8 @@ export default function GalleryPage() {
           >
             <div className="aspect-[4/3] relative overflow-hidden bg-[#0f172a]">
               <CanvasBackground 
-                config={bg.defaultConfig} 
-                renderFn={bg.render} 
+                config={bg.defaultConfig as ConfigRecord}
+                renderFn={bg.render as CanvasRenderFunction<ConfigRecord>}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent"></div>
               <span className="absolute top-3 left-3 rounded-full px-3 py-1 text-[11px] font-semibold bg-white/90 text-[#1f2937]">

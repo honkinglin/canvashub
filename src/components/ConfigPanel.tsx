@@ -1,11 +1,11 @@
-import type { ConfigSchemaItem } from '../types';
+import type { ConfigSchemaItem, ConfigRecord, ConfigValue } from '../types';
 import { getConfigLabelLocalized } from '../i18n';
 import type { Language } from '../ui/UIContext';
 
 interface ConfigPanelProps {
   schema: ConfigSchemaItem[];
-  config: Record<string, any>;
-  onChange: (key: string, value: any) => void;
+  config: ConfigRecord;
+  onChange: (key: string, value: ConfigValue) => void;
   language: Language;
 }
 
@@ -15,13 +15,17 @@ export default function ConfigPanel({ schema, config, onChange, language }: Conf
       {schema.map((item) => {
         const value = config[item.id];
         const label = getConfigLabelLocalized(language, item.label);
+        const numberValue = typeof value === 'number' ? value : 0;
+        const colorValue = typeof value === 'string' ? value : '#000000';
+        const booleanValue = typeof value === 'boolean' ? value : false;
+        const selectValue = typeof value === 'string' ? value : '';
 
         return (
           <div key={item.id} className="flex flex-col gap-1.5">
             <div className="flex justify-between items-center text-xs text-[var(--text-muted)] font-semibold">
               <label htmlFor={item.id}>{label}</label>
-              {item.type === 'range' && <span>{value}</span>}
-              {item.type === 'number' && typeof value === 'number' && <span>{value.toFixed(2)}</span>}
+              {item.type === 'range' && <span>{numberValue}</span>}
+              {item.type === 'number' && <span>{numberValue.toFixed(2)}</span>}
             </div>
 
             {item.type === 'range' && (
@@ -32,7 +36,7 @@ export default function ConfigPanel({ schema, config, onChange, language }: Conf
                 min={item.options?.min || 0}
                 max={item.options?.max || 100}
                 step={item.options?.step || 1}
-                value={value}
+                value={numberValue}
                 onChange={(e) => onChange(item.id, parseFloat(e.target.value))}
               />
             )}
@@ -45,7 +49,7 @@ export default function ConfigPanel({ schema, config, onChange, language }: Conf
                 min={item.options?.min}
                 max={item.options?.max}
                 step={item.options?.step}
-                value={value}
+                value={numberValue}
                 onChange={(e) => onChange(item.id, parseFloat(e.target.value))}
               />
             )}
@@ -56,10 +60,10 @@ export default function ConfigPanel({ schema, config, onChange, language }: Conf
                   id={item.id}
                   type="color"
                   className="w-9 h-9 rounded-md cursor-pointer border-0 bg-transparent p-0"
-                  value={value}
+                  value={colorValue}
                   onChange={(e) => onChange(item.id, e.target.value)}
                 />
-                <span className="text-xs font-mono text-[var(--text-muted)] uppercase">{value}</span>
+                <span className="text-xs font-mono text-[var(--text-muted)] uppercase">{colorValue}</span>
               </div>
             )}
 
@@ -67,13 +71,13 @@ export default function ConfigPanel({ schema, config, onChange, language }: Conf
               <button
                 id={item.id}
                 className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
-                  value ? 'bg-[#0864ef]' : 'bg-black/30'
+                  booleanValue ? 'bg-[#0864ef]' : 'bg-black/30'
                 }`}
-                onClick={() => onChange(item.id, !value)}
+                onClick={() => onChange(item.id, !booleanValue)}
               >
                 <span
                   className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform ${
-                    value ? 'translate-x-4' : 'translate-x-1'
+                    booleanValue ? 'translate-x-4' : 'translate-x-1'
                   }`}
                 />
               </button>
@@ -83,7 +87,7 @@ export default function ConfigPanel({ schema, config, onChange, language }: Conf
               <select
                 id={item.id}
                 className="w-full bg-black/10 border border-[color:var(--surface-border)] rounded-lg px-3 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:border-[#0864ef] transition-colors"
-                value={value}
+                value={selectValue}
                 onChange={(e) => onChange(item.id, e.target.value)}
               >
                 {item.options.options.map((opt) => (
