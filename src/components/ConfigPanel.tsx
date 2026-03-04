@@ -1,6 +1,10 @@
 import type { ConfigSchemaItem, ConfigRecord, ConfigValue } from '../types';
 import { getConfigLabelLocalized } from '../i18n';
 import type { Language } from '../ui/UIContext';
+import { Slider } from '@/components/ui/slider';
+import { Input } from '@/components/ui/input';
+import { Switch } from '@/components/ui/switch';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface ConfigPanelProps {
   schema: ConfigSchemaItem[];
@@ -22,30 +26,27 @@ export default function ConfigPanel({ schema, config, onChange, language }: Conf
 
         return (
           <div key={item.id} className="flex flex-col gap-1.5">
-            <div className="flex justify-between items-center text-xs text-[var(--text-muted)] font-semibold">
+            <div className="flex justify-between items-center text-[11px] text-[var(--text-muted)] font-semibold">
               <label htmlFor={item.id}>{label}</label>
               {item.type === 'range' && <span>{numberValue}</span>}
               {item.type === 'number' && <span>{numberValue.toFixed(2)}</span>}
             </div>
 
             {item.type === 'range' && (
-              <input
-                id={item.id}
-                type="range"
-                className="w-full accent-[#0864ef] h-1.5 bg-black/20 rounded-lg appearance-none cursor-pointer"
+              <Slider
                 min={item.options?.min || 0}
                 max={item.options?.max || 100}
                 step={item.options?.step || 1}
-                value={numberValue}
-                onChange={(e) => onChange(item.id, parseFloat(e.target.value))}
+                value={[numberValue]}
+                onValueChange={(next) => onChange(item.id, next[0] ?? numberValue)}
               />
             )}
 
             {item.type === 'number' && (
-                <input
-                  id={item.id}
-                  type="number"
-                className="w-full bg-black/10 border border-[color:var(--surface-border)] rounded-lg px-3 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:border-[#0864ef] transition-colors"
+              <Input
+                id={item.id}
+                type="number"
+                className="bg-black/10"
                 min={item.options?.min}
                 max={item.options?.max}
                 step={item.options?.step}
@@ -59,43 +60,36 @@ export default function ConfigPanel({ schema, config, onChange, language }: Conf
                 <input
                   id={item.id}
                   type="color"
-                  className="w-9 h-9 rounded-md cursor-pointer border-0 bg-transparent p-0"
+                  className="w-8 h-8 rounded-md cursor-pointer border-0 bg-transparent p-0"
                   value={colorValue}
                   onChange={(e) => onChange(item.id, e.target.value)}
                 />
-                <span className="text-xs font-mono text-[var(--text-muted)] uppercase">{colorValue}</span>
+                <span className="text-[11px] font-mono text-[var(--text-muted)] uppercase">{colorValue}</span>
               </div>
             )}
 
             {item.type === 'boolean' && (
-              <button
+              <Switch
                 id={item.id}
-                className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
-                  booleanValue ? 'bg-[#0864ef]' : 'bg-black/30'
-                }`}
-                onClick={() => onChange(item.id, !booleanValue)}
-              >
-                <span
-                  className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform ${
-                    booleanValue ? 'translate-x-4' : 'translate-x-1'
-                  }`}
-                />
-              </button>
+                checked={booleanValue}
+                onCheckedChange={(checked) => onChange(item.id, checked)}
+                className="data-[state=checked]:bg-[#0864ef] data-[state=unchecked]:bg-black/30"
+              />
             )}
 
             {item.type === 'select' && item.options?.options && (
-              <select
-                id={item.id}
-                className="w-full bg-black/10 border border-[color:var(--surface-border)] rounded-lg px-3 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:border-[#0864ef] transition-colors"
-                value={selectValue}
-                onChange={(e) => onChange(item.id, e.target.value)}
-              >
-                {item.options.options.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
+              <Select value={selectValue} onValueChange={(value) => onChange(item.id, value)}>
+                <SelectTrigger id={item.id} className="w-full bg-black/10">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {item.options.options.map((opt) => (
+                    <SelectItem key={opt} value={opt}>
+                      {opt}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             )}
           </div>
         );

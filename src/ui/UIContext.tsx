@@ -41,6 +41,8 @@ export function UIProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     localStorage.setItem(THEME_KEY, theme);
     document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.style.colorScheme = theme;
   }, [theme]);
 
   const value = useMemo<UIContextValue>(
