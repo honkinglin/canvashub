@@ -92,6 +92,18 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '流体渐变',
     description: '有机流动的径向渐变色块，适合视觉主屏和活动页。',
   },
+  magnetic: {
+    name: '磁性流场',
+    description: '发光粒子会被鼠标吸引并带出拖尾，适合科技感主视觉。',
+  },
+  'antigravity-ring': {
+    name: '反重力环流',
+    description: '空心环状短划粒子场，跟随鼠标并带有局部色带变化。',
+  },
+  'cursor-trail': {
+    name: '鼠标尾迹',
+    description: '高密度微粒随鼠标扰动并留下柔滑尾迹，适合深色背景。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -108,6 +120,25 @@ const zhConfigLabelMap: Record<string, string> = {
   'Color 1': '颜色 1',
   'Color 2': '颜色 2',
   'Color 3': '颜色 3',
+  'Glow Color': '辉光颜色',
+  'Particle Size': '粒子大小',
+  'Pointer Radius': '鼠标影响半径',
+  'Pointer Force': '鼠标牵引力',
+  Friction: '阻尼',
+  Drift: '随机漂移',
+  'Ring Radius': '环半径',
+  'Ring Width': '环宽 1',
+  'Ring Width 2': '环宽 2',
+  'Ring Displacement': '环位移强度',
+  'Noise Amount': '噪声强度',
+  Density: '密度',
+  'Particles Scale': '粒子缩放',
+  'Max Velocity': '最大速度',
+  'Mouse Radius': '鼠标影响范围',
+  'Mouse Strength': '鼠标强度',
+  'Trail Alpha': '尾迹透明度',
+  'Point Size': '粒子尺寸',
+  Jitter: '随机扰动',
   Scale: '缩放',
 };
 
