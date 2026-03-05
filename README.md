@@ -29,8 +29,9 @@ npm run dev
 ```
 
 ## Tech Stack
-- React 18 + Vite
+- React 19 + Vite
 - TypeScript
 - Tailwind CSS v4
-- prism-react-renderer (Syntax highlighting)
+- Prism-react-renderer (Syntax highlighting)
 - Lucide React (Icons)
+- Shadcn/ui (UI components)

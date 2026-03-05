@@ -1,9 +1,11 @@
 import { particleModule } from './particle';
+import { confettiModule } from './confetti';
 import { gradientModule } from './gradient';
 import { cursorTrailModule } from './cursorTrail';
 
 export const backgrounds = [
   particleModule,
+  confettiModule,
   gradientModule,
   cursorTrailModule
 ];
