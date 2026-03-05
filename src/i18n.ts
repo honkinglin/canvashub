@@ -120,6 +120,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '烟花爆发',
     description: '点击或触摸触发彩色粒子爆发，并带有冲击波圆环扩散效果。',
   },
+  'edge-link': {
+    name: '边缘连线',
+    description: '粒子从四周缓慢进入并呼吸闪烁，接近鼠标时形成动态连线网络。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -207,6 +211,15 @@ const zhConfigLabelMap: Record<string, string> = {
   'Fade Alpha': '残影透明度',
   'Auto Burst Jitter': '自动爆发抖动',
   'Stop Auto On Interact': '交互后停止自动',
+  'Ball Count': '球体数量',
+  'Ball Radius': '球体半径',
+  'Speed Min': '最小速度',
+  'Speed Max': '最大速度',
+  'Distance Limit': '连线阈值距离',
+  'Pulse Speed': '呼吸速度',
+  'Enable Mouse Node': '启用鼠标节点',
+  'Spawn Padding': '出生边距',
+  'Bounds Padding': '边界留白',
 };
 
 export function getBackgroundLocalized(

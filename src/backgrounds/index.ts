@@ -1,17 +1,19 @@
-import { textFlowModule } from './textFlow';
 import { confettiModule } from './confetti';
-import { particleModule } from './particle';
+import { textFlowModule } from './textFlow';
 import { cursorTrailModule } from './cursorTrail';
+import { edgeLinkModule } from './edgeLink';
+import { particleModule } from './particle';
 import { stardustBurstModule } from './stardustBurst';
 import { fireworksBurstModule } from './fireworksBurst';
 
 export const backgrounds = [
-  textFlowModule,
   confettiModule,
-  particleModule,
+  textFlowModule,
   cursorTrailModule,
+  edgeLinkModule,
+  particleModule,
   stardustBurstModule,
-  fireworksBurstModule
+  fireworksBurstModule,
 ];
 
 export const getBackgroundById = (id: string) => {
