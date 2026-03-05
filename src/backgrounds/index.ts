@@ -1,14 +1,12 @@
-import { particleModule } from './particle';
-import { confettiModule } from './confetti';
 import { textFlowModule } from './textFlow';
-import { gradientModule } from './gradient';
+import { confettiModule } from './confetti';
+import { particleModule } from './particle';
 import { cursorTrailModule } from './cursorTrail';
 
 export const backgrounds = [
-  particleModule,
-  confettiModule,
   textFlowModule,
-  gradientModule,
+  confettiModule,
+  particleModule,
   cursorTrailModule
 ];
 
