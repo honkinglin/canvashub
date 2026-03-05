@@ -112,6 +112,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '鼠标尾迹',
     description: '高密度微粒随鼠标扰动并留下柔滑尾迹，适合深色背景。',
   },
+  'stardust-burst': {
+    name: '星尘爆发',
+    description: '点击触发星尘爆发，支持拖尾、重力和颜色漂移，适合活动页和主视觉。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -182,6 +186,11 @@ const zhConfigLabelMap: Record<string, string> = {
   'Point Size': '粒子尺寸',
   Jitter: '随机扰动',
   Scale: '缩放',
+  'Max Particle Size': '粒子最大尺寸',
+  'Color Variation': '颜色波动',
+  'Background Fade': '背景淡化',
+  'Auto Burst': '自动爆发',
+  'Auto Burst Interval': '自动爆发间隔',
 };
 
 export function getBackgroundLocalized(
