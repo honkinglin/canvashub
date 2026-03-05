@@ -116,6 +116,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '星尘爆发',
     description: '点击触发星尘爆发，支持拖尾、重力和颜色漂移，适合活动页和主视觉。',
   },
+  'fireworks-burst': {
+    name: '烟花爆发',
+    description: '点击或触摸触发彩色粒子爆发，并带有冲击波圆环扩散效果。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -191,6 +195,18 @@ const zhConfigLabelMap: Record<string, string> = {
   'Background Fade': '背景淡化',
   'Auto Burst': '自动爆发',
   'Auto Burst Interval': '自动爆发间隔',
+  'Particle Radius Min': '粒子最小半径',
+  'Particle Radius Max': '粒子最大半径',
+  'Spread Min': '最小扩散半径',
+  'Spread Max': '最大扩散半径',
+  'Duration Min': '最短时长',
+  'Duration Max': '最长时长',
+  'Ring Radius Min': '圆环最小半径',
+  'Ring Radius Max': '圆环最大半径',
+  'Ring Line Width': '圆环线宽',
+  'Fade Alpha': '残影透明度',
+  'Auto Burst Jitter': '自动爆发抖动',
+  'Stop Auto On Interact': '交互后停止自动',
 };
 
 export function getBackgroundLocalized(
