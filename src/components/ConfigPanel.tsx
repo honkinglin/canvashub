@@ -23,6 +23,7 @@ export default function ConfigPanel({ schema, config, onChange, language }: Conf
         const colorValue = typeof value === 'string' ? value : '#000000';
         const booleanValue = typeof value === 'boolean' ? value : false;
         const selectValue = typeof value === 'string' ? value : '';
+        const textValue = typeof value === 'string' ? value : '';
 
         return (
           <div key={item.id} className="flex flex-col gap-1.5">
@@ -90,6 +91,16 @@ export default function ConfigPanel({ schema, config, onChange, language }: Conf
                   ))}
                 </SelectContent>
               </Select>
+            )}
+
+            {item.type === 'text' && (
+              <Input
+                id={item.id}
+                type="text"
+                className="bg-black/10"
+                value={textValue}
+                onChange={(e) => onChange(item.id, e.target.value)}
+              />
             )}
           </div>
         );

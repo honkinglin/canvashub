@@ -1,4 +1,4 @@
-export type ConfigType = 'number' | 'range' | 'color' | 'boolean' | 'select';
+export type ConfigType = 'number' | 'range' | 'color' | 'boolean' | 'select' | 'text';
 export type ConfigValue = number | string | boolean;
 export type ConfigRecord = Record<string, ConfigValue>;
 
