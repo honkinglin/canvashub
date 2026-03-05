@@ -43,7 +43,7 @@ function DemoDetailContent({
 }) {
   const [config, setConfig] = useState<ConfigRecord>({ ...(bgModule.defaultConfig as ConfigRecord) });
   const [activeTab, setActiveTab] = useState<'config' | 'code'>('config');
-  const [codeFormat, setCodeFormat] = useState<CodeFormat>('html');
+  const [codeFormat, setCodeFormat] = useState<CodeFormat>('javascript');
 
   const handleConfigChange = (key: string, value: ConfigValue) => {
     setConfig((prev) => ({ ...prev, [key]: value }));
@@ -105,16 +105,16 @@ function DemoDetailContent({
               <p className="text-sm ui-muted">{text.codeHint}</p>
               <div className="ui-pill inline-flex rounded-full p-1">
                 <button
-                  onClick={() => setCodeFormat('html')}
-                  className={`px-3 py-1 text-xs font-semibold rounded-full transition-colors ${codeFormat === 'html' ? 'ui-pill-active' : ''}`}
-                >
-                  HTML
-                </button>
-                <button
                   onClick={() => setCodeFormat('javascript')}
                   className={`px-3 py-1 text-xs font-semibold rounded-full transition-colors ${codeFormat === 'javascript' ? 'ui-pill-active' : ''}`}
                 >
                   JavaScript
+                </button>
+                <button
+                  onClick={() => setCodeFormat('html')}
+                  className={`px-3 py-1 text-xs font-semibold rounded-full transition-colors ${codeFormat === 'html' ? 'ui-pill-active' : ''}`}
+                >
+                  HTML
                 </button>
               </div>
               <CodeRenderer

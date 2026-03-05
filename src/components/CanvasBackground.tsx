@@ -28,7 +28,7 @@ export default function CanvasBackground<T>({ config, renderFn, className = '' }
       canvas.height = rect.height * dpr;
       canvas.style.width = `${rect.width}px`;
       canvas.style.height = `${rect.height}px`;
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       
       // Optionally notify controller of resize if needed,
       // but usually the render loop handles drawing to current canvas size.
