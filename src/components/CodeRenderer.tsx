@@ -4,11 +4,12 @@ import { Highlight, themes } from 'prism-react-renderer';
 
 interface CodeRendererProps {
   code: string;
+  language?: 'tsx' | 'html' | 'javascript';
   copyLabel?: string;
   copiedLabel?: string;
 }
 
-export default function CodeRenderer({ code, copyLabel = 'Copy', copiedLabel = 'Copied!' }: CodeRendererProps) {
+export default function CodeRenderer({ code, language = 'tsx', copyLabel = 'Copy', copiedLabel = 'Copied!' }: CodeRendererProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -47,7 +48,7 @@ export default function CodeRenderer({ code, copyLabel = 'Copy', copiedLabel = '
         </button>
       </div>
       <div className="p-4 overflow-x-auto text-sm font-mono">
-        <Highlight theme={themes.nightOwl} code={code} language="tsx">
+        <Highlight theme={themes.nightOwl} code={code} language={language}>
           {({ className, style, tokens, getLineProps, getTokenProps }) => (
             <pre className={className} style={{ ...style, backgroundColor: 'transparent' }}>
               {tokens.map((line, i) => (

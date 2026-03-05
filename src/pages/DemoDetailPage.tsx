@@ -12,6 +12,24 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
+type CodeFormat = 'html' | 'javascript';
+
+function splitHtmlAndJs(code: string): { html: string; javascript: string } {
+  const scriptMatch = code.match(/<script>([\s\S]*?)<\/script>/i);
+  if (!scriptMatch) {
+    return { html: code, javascript: code };
+  }
+
+  const fullScriptBlock = scriptMatch[0];
+  const scriptContent = (scriptMatch[1] || '').trim();
+  const htmlWithoutScript = code.replace(fullScriptBlock, '<script src="./effect.js"></script>');
+
+  return {
+    html: htmlWithoutScript.trim(),
+    javascript: scriptContent,
+  };
+}
+
 function DemoDetailContent({
   bgModule,
   language,
@@ -25,12 +43,16 @@ function DemoDetailContent({
 }) {
   const [config, setConfig] = useState<ConfigRecord>({ ...(bgModule.defaultConfig as ConfigRecord) });
   const [activeTab, setActiveTab] = useState<'config' | 'code'>('config');
+  const [codeFormat, setCodeFormat] = useState<CodeFormat>('html');
 
   const handleConfigChange = (key: string, value: ConfigValue) => {
     setConfig((prev) => ({ ...prev, [key]: value }));
   };
 
   const localized = getBackgroundLocalized(language, bgModule.id, bgModule.name, bgModule.description);
+  const generatedCode = (bgModule.generateCode as (value: ConfigRecord) => string)(config);
+  const splitCode = splitHtmlAndJs(generatedCode);
+  const codeToRender = codeFormat === 'html' ? splitCode.html : splitCode.javascript;
 
   return (
     <div className="h-[calc(100vh-64px)] flex flex-col lg:flex-row relative">
@@ -81,8 +103,23 @@ function DemoDetailContent({
 
             <TabsContent value="code" className="space-y-4">
               <p className="text-sm ui-muted">{text.codeHint}</p>
+              <div className="ui-pill inline-flex rounded-full p-1">
+                <button
+                  onClick={() => setCodeFormat('html')}
+                  className={`px-3 py-1 text-xs font-semibold rounded-full transition-colors ${codeFormat === 'html' ? 'ui-pill-active' : ''}`}
+                >
+                  HTML
+                </button>
+                <button
+                  onClick={() => setCodeFormat('javascript')}
+                  className={`px-3 py-1 text-xs font-semibold rounded-full transition-colors ${codeFormat === 'javascript' ? 'ui-pill-active' : ''}`}
+                >
+                  JavaScript
+                </button>
+              </div>
               <CodeRenderer
-                code={(bgModule.generateCode as (value: ConfigRecord) => string)(config)}
+                code={codeToRender}
+                language={codeFormat}
                 copyLabel={text.detailCopy}
                 copiedLabel={text.detailCopied}
               />

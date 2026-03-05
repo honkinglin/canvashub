@@ -127,49 +127,107 @@ const render: CanvasRenderFunction<ParticleConfig> = (canvas, ctx, initialConfig
   };
 };
 
-const generateCode = (config: ParticleConfig) => `
-import React, { useEffect, useRef } from 'react';
-
-const ParticleBackground = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
+const generateCode = (config: ParticleConfig) => `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Network Particles</title>
+  <style>
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: ${config.backgroundColor}; }
+    canvas { display: block; width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
     const config = ${JSON.stringify(config, null, 2)};
-    
-    // Resize handler
-    const resize = () => {
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = 0;
+    let height = 0;
+    const particles = [];
+
+    class Particle {
+      constructor() {
+        const angle = Math.random() * Math.PI * 2;
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = Math.cos(angle) * config.speed * (Math.random() * 0.5 + 0.5);
+        this.vy = Math.sin(angle) * config.speed * (Math.random() * 0.5 + 0.5);
+        this.radius = Math.random() * 2 + 1;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+    }
+
+    function resize() {
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
-      ctx.scale(dpr, dpr);
-    };
-    window.addEventListener('resize', resize);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function syncParticleCount() {
+      while (particles.length < config.particleCount) particles.push(new Particle());
+      if (particles.length > config.particleCount) particles.length = config.particleCount;
+    }
+
+    function draw() {
+      ctx.fillStyle = config.backgroundColor;
+      ctx.fillRect(0, 0, width, height);
+
+      syncParticleCount();
+
+      for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i];
+        const currentSpeed = Math.hypot(p1.vx, p1.vy) || 1;
+        const scale = config.speed / currentSpeed;
+        p1.vx *= 0.98 + scale * 0.02;
+        p1.vy *= 0.98 + scale * 0.02;
+
+        p1.update();
+        ctx.beginPath();
+        ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
+        ctx.fillStyle = config.color;
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < config.connectionDistance) {
+            const alpha = 1 - dist / config.connectionDistance;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = config.color + Math.floor(alpha * 255).toString(16).padStart(2, '0');
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
     resize();
-
-    // Particle logic...
-    // (A simplified or full particle code here)
-    // For brevity, using placeholder logic
-    
-    // Cleanup
-    return () => window.removeEventListener('resize', resize);
-  }, []);
-
-  return (
-    <canvas 
-      ref={canvasRef} 
-      style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }} 
-    />
-  );
-};
-
-export default ParticleBackground;
+    syncParticleCount();
+    draw();
+    window.addEventListener('resize', resize);
+  </script>
+</body>
+</html>
 `;
 
 export const particleModule: BackgroundModule<ParticleConfig> = {

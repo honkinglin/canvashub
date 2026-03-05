@@ -87,51 +87,86 @@ const render: CanvasRenderFunction<WaveConfig> = (canvas, ctx, initialConfig) =>
   };
 };
 
-const generateCode = (config: WaveConfig) => `
-import React, { useEffect, useRef } from 'react';
-
-const WaveBackground = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
+const generateCode = (config: WaveConfig) => `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ocean Waves</title>
+  <style>
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: ${config.backgroundColor}; }
+    canvas { display: block; width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
     const config = ${JSON.stringify(config, null, 2)};
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let width = 0;
+    let height = 0;
     let time = 0;
-    let animationId: number;
 
-    const resize = () => {
+    function hexToRgb(hex) {
+      const value = hex.replace('#', '');
+      return {
+        r: parseInt(value.slice(0, 2), 16),
+        g: parseInt(value.slice(2, 4), 16),
+        b: parseInt(value.slice(4, 6), 16)
+      };
+    }
+
+    function resize() {
       const dpr = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
-      ctx.scale(dpr, dpr);
-    };
-    
-    window.addEventListener('resize', resize);
-    resize();
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
 
-    const draw = () => {
-      // Wave logic implementation...
+    function draw() {
+      ctx.fillStyle = config.backgroundColor;
+      ctx.fillRect(0, 0, width, height);
+
+      const c1 = hexToRgb(config.color1);
+      const c2 = hexToRgb(config.color2);
+
+      for (let i = 0; i < config.waveCount; i++) {
+        const t = i / Math.max(1, config.waveCount - 1);
+        const r = Math.round(c1.r + (c2.r - c1.r) * t);
+        const g = Math.round(c1.g + (c2.g - c1.g) * t);
+        const b = Math.round(c1.b + (c2.b - c1.b) * t);
+        const startY = height * 0.52 + (i * 24 - config.waveCount * 12);
+        const freq = config.frequency * (1 + i * 0.08);
+        const phase = time + i * Math.PI * 0.55;
+
+        ctx.beginPath();
+        ctx.moveTo(0, height);
+        ctx.lineTo(0, startY);
+        for (let x = 0; x <= width; x += 8) {
+          const y = startY + Math.sin(x * freq + phase) * config.amplitude;
+          ctx.lineTo(x, y);
+        }
+        ctx.lineTo(width, height);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',0.5)';
+        ctx.fill();
+      }
+
       time += config.speed;
-      animationId = requestAnimationFrame(draw);
-    };
+      requestAnimationFrame(draw);
+    }
+
+    resize();
     draw();
-
-    return () => {
-      window.removeEventListener('resize', resize);
-      cancelAnimationFrame(animationId);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }} />;
-};
-
-export default WaveBackground;
+    window.addEventListener('resize', resize);
+  </script>
+</body>
+</html>
 `;
 
 export const waveModule: BackgroundModule<WaveConfig> = {
