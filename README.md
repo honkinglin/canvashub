@@ -9,11 +9,9 @@
 </p>
 
 <div style="display: flex; gap: 1rem;">
-  <img width="200" src="./docs/home.png" alt="home" />
-  <img width="200" src="./docs/text-flow.png" alt="text-flow" />
-  <img width="200" src="./docs/cursor-trail.png" alt="cursor-trail" />
-  <img width="200" src="./docs/confetti-drift.png" alt="confetti-drift" />
-  <img width="200" src="./docs/network-particles.png" alt="network-particles" />
+  <img width="30%" src="./docs/text-flow.png" alt="text-flow" />
+  <img width="30%" src="./docs/home.png" alt="home" />
+  <img width="30%" src="./docs/cursor-trail.png" alt="cursor-trail" />
 </div>
 
 ## Why CanvasHub
