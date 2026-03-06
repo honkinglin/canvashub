@@ -41,7 +41,11 @@ export default function GalleryPage() {
               <Link key={bg.id} to={`/bg/${bg.id}`} className="group reveal block transition-all duration-300 hover:-translate-y-1.5" style={{ animationDelay: `${index * 90}ms` }}>
                 <Card className="overflow-hidden rounded-3xl border-[var(--surface-border)] bg-[var(--surface)] transition-all duration-300 group-hover:shadow-[0_18px_40px_rgba(8,100,239,0.18)]">
                   <div className="aspect-[4/3] relative overflow-hidden bg-[#0f172a]">
-                    <CanvasBackground config={bg.defaultConfig as ConfigRecord} renderFn={bg.render as CanvasRenderFunction<ConfigRecord>} />
+                    <CanvasBackground
+                      config={bg.defaultConfig as ConfigRecord}
+                      renderFn={bg.render as CanvasRenderFunction<ConfigRecord>}
+                      pauseWhenOffscreen
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" />
                     <Badge className="absolute top-3 left-3 text-[11px] bg-white/95 text-[#1f2937]">{text.livePreview}</Badge>
                   </div>

@@ -1,15 +1,54 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { CanvasRenderFunction, ConfigRecord } from '../types';
 
 interface CanvasBackgroundProps<T = ConfigRecord> {
   config: T;
   renderFn: CanvasRenderFunction<T>;
   className?: string;
+  pauseWhenOffscreen?: boolean;
+  offscreenRootMargin?: string;
 }
 
-export default function CanvasBackground<T>({ config, renderFn, className = '' }: CanvasBackgroundProps<T>) {
+export default function CanvasBackground<T>({
+  config,
+  renderFn,
+  className = '',
+  pauseWhenOffscreen = false,
+  offscreenRootMargin = '220px',
+}: CanvasBackgroundProps<T>) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const controllerRef = useRef<{ cleanup: () => void; updateConfig: (newConfig: T) => void } | null>(null);
+  const [isVisible, setIsVisible] = useState(!pauseWhenOffscreen);
+  const shouldRun = !pauseWhenOffscreen || isVisible;
+
+  useEffect(() => {
+    if (!pauseWhenOffscreen) {
+      setIsVisible(true);
+      return;
+    }
+
+    const element = wrapperRef.current;
+    if (!element) return;
+
+    if (!('IntersectionObserver' in window)) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        setIsVisible(Boolean(entry?.isIntersecting));
+      },
+      { root: null, rootMargin: offscreenRootMargin, threshold: 0.01 }
+    );
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [pauseWhenOffscreen, offscreenRootMargin]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -39,6 +78,16 @@ export default function CanvasBackground<T>({ config, renderFn, className = '' }
       resizeObserver.observe(parent);
     }
 
+    if (!shouldRun) {
+      if (controllerRef.current) {
+        controllerRef.current.cleanup();
+        controllerRef.current = null;
+      }
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+
     const controller = renderFn(canvas, ctx, config);
     controllerRef.current = controller;
 
@@ -48,16 +97,16 @@ export default function CanvasBackground<T>({ config, renderFn, className = '' }
       controllerRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [renderFn]); 
+  }, [renderFn, shouldRun]);
 
   useEffect(() => {
-    if (controllerRef.current) {
+    if (shouldRun && controllerRef.current) {
       controllerRef.current.updateConfig(config);
     }
-  }, [config]);
+  }, [config, shouldRun]);
 
   return (
-    <div className={`w-full h-full absolute inset-0 overflow-hidden ${className}`}>
+    <div ref={wrapperRef} className={`w-full h-full absolute inset-0 overflow-hidden ${className}`}>
       <canvas ref={canvasRef} className="block w-full h-full" />
     </div>
   );
