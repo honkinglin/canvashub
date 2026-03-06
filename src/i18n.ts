@@ -140,6 +140,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '经典烟花',
     description: '火箭升空后在空中爆炸，粒子叠加出明亮的经典烟花拖尾。',
   },
+  'branch-lines': {
+    name: '分形线生长',
+    description: '线条从中心开始分叉扩张，叠加出彩色霓虹分形轨迹。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -278,6 +282,17 @@ const zhConfigLabelMap: Record<string, string> = {
   'Particle Decay Min': '粒子最小衰减',
   'Particle Decay Max': '粒子最大衰减',
   'Particle Trail Length': '粒子拖尾长度',
+  'Min Distance': '最小距离',
+  'Max Distance': '最大距离',
+  'Initial Width': '初始宽度',
+  'Max Lines': '最大线段数',
+  'Initial Lines': '初始线段数',
+  'Spawn Interval': '生成间隔',
+  'Spawn Chance': '生成概率',
+  'Branch Chance': '分叉概率',
+  'Die Chance': '终止概率',
+  'Width Decay': '宽度衰减',
+  'Shadow Blur': '阴影模糊',
 };
 
 export function getBackgroundLocalized(
