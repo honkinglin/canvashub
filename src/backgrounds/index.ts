@@ -5,6 +5,7 @@ import { edgeLinkModule } from './edgeLink';
 import { particleModule } from './particle';
 import { stardustBurstModule } from './stardustBurst';
 import { fireworksBurstModule } from './fireworksBurst';
+import { starfieldWarpModule } from './starfieldWarp';
 
 export const backgrounds = [
   confettiModule,
@@ -14,6 +15,7 @@ export const backgrounds = [
   particleModule,
   stardustBurstModule,
   fireworksBurstModule,
+  starfieldWarpModule,
 ];
 
 export const getBackgroundById = (id: string) => {

@@ -124,6 +124,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '边缘连线',
     description: '粒子从四周缓慢进入并呼吸闪烁，接近鼠标时形成动态连线网络。',
   },
+  'starfield-warp': {
+    name: '星际穿梭',
+    description: '复古 3D 星空穿梭效果，支持 Warp 拖尾与透视速度调节。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -220,6 +224,17 @@ const zhConfigLabelMap: Record<string, string> = {
   'Enable Mouse Node': '启用鼠标节点',
   'Spawn Padding': '出生边距',
   'Bounds Padding': '边界留白',
+  'Star Color': '星点颜色',
+  'Star Count': '星点数量',
+  'Focal Length': '焦距',
+  'Base Speed': '基础速度',
+  'Warp Enabled': '启用 Warp',
+  'Warp Speed': 'Warp 速度',
+  'Trail Fade': '拖尾淡化',
+  'Max Depth': '最大深度',
+  'Star Size': '星点尺寸',
+  'Min Opacity': '最小透明度',
+  'Max Opacity': '最大透明度',
 };
 
 export function getBackgroundLocalized(
