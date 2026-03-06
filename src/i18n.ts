@@ -144,6 +144,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '分形线生长',
     description: '线条从中心开始分叉扩张，叠加出彩色霓虹分形轨迹。',
   },
+  'magic-dust': {
+    name: '魔法尘粒',
+    description: '鼠标移动会散发发光尘粒，背景中还有持续漂浮的柔和粒子。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -293,6 +297,11 @@ const zhConfigLabelMap: Record<string, string> = {
   'Die Chance': '终止概率',
   'Width Decay': '宽度衰减',
   'Shadow Blur': '阴影模糊',
+  'Ambient Count': '环境粒子数',
+  'Burst Count': '喷发粒子数',
+  'Life Min': '最短生命周期',
+  'Life Max': '最长生命周期',
+  'Glow Strength': '辉光强度',
 };
 
 export function getBackgroundLocalized(
