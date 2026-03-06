@@ -152,6 +152,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '流场三角粒子',
     description: '三角粒子由鼠标发射并沿噪声流场运动，形成灵动的彩色轨迹。',
   },
+  'rain-shower': {
+    name: '暴雨飞溅',
+    description: '高性能雨线与水花飞溅效果，支持风向、强度和鼠标交互调节。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -318,6 +322,20 @@ const zhConfigLabelMap: Record<string, string> = {
   'Hue Saturation': '色相饱和度',
   'Lightness Min': '亮度下限',
   'Lightness Max': '亮度上限',
+  'Rain Color': '雨滴颜色',
+  'Spawn Rate': '生成频率',
+  Wind: '风力',
+  'Splash Count': '飞溅数量',
+  'Line Length': '雨线长度',
+  'Max Rain': '最大雨滴数',
+  'Max Drops': '最大水花数',
+  Gravity: '重力',
+  'Drop Max Speed': '水花最大速度',
+  'Drop Size Min': '水花最小尺寸',
+  'Drop Size Max': '水花最大尺寸',
+  Interaction: '交互开关',
+  'Pointer Wind': '鼠标风力',
+  'Pointer Spawn Boost': '鼠标增雨强度',
 };
 
 export function getBackgroundLocalized(
