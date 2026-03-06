@@ -148,6 +148,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '魔法尘粒',
     description: '鼠标移动会散发发光尘粒，背景中还有持续漂浮的柔和粒子。',
   },
+  'flow-triangles': {
+    name: '流场三角粒子',
+    description: '三角粒子由鼠标发射并沿噪声流场运动，形成灵动的彩色轨迹。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -302,6 +306,18 @@ const zhConfigLabelMap: Record<string, string> = {
   'Life Min': '最短生命周期',
   'Life Max': '最长生命周期',
   'Glow Strength': '辉光强度',
+  'Cell Size': '网格尺寸',
+  'Force Strength': '流场强度',
+  'Noise Scale': '噪声缩放',
+  'Time Scale': '时间尺度',
+  'Spawn Per Frame': '每帧发射数',
+  'Emitter Lerp': '发射器跟随',
+  'Particle Drag': '粒子阻尼',
+  'Alpha Decay': '透明度衰减',
+  'Triangle Spread': '三角扩散',
+  'Hue Saturation': '色相饱和度',
+  'Lightness Min': '亮度下限',
+  'Lightness Max': '亮度上限',
 };
 
 export function getBackgroundLocalized(

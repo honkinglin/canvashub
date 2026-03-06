@@ -11,6 +11,7 @@ import { dotCountdownModule } from './dotCountdown';
 import { classicFireworksModule } from './classicFireworks';
 import { branchLinesModule } from './branchLines';
 import { magicDustModule } from './magicDust';
+import { flowTrianglesModule } from './flowTriangles';
 
 export const backgrounds = [
   confettiModule,
@@ -26,6 +27,7 @@ export const backgrounds = [
   classicFireworksModule,
   branchLinesModule,
   magicDustModule,
+  flowTrianglesModule,
 ];
 
 export const getBackgroundById = (id: string) => {
