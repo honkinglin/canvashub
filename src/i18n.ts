@@ -136,6 +136,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '粒子倒计时',
     description: '彩色粒子先在空间游走，再聚合成倒计时数字与 GO 文案。',
   },
+  'classic-fireworks': {
+    name: '经典烟花',
+    description: '火箭升空后在空中爆炸，粒子叠加出明亮的经典烟花拖尾。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -261,6 +265,19 @@ const zhConfigLabelMap: Record<string, string> = {
   'Start Number': '起始数字',
   'End Number': '终止数字',
   'Loop Countdown': '循环倒计时',
+  'Hue Shift Speed': '色相变化速度',
+  'Auto Launch Interval': '自动发射间隔',
+  'Hold Launch Interval': '按住发射间隔',
+  'Rocket Start Speed': '火箭初始速度',
+  'Rocket Acceleration': '火箭加速度',
+  'Rocket Trail Length': '火箭拖尾长度',
+  'Particle Speed Min': '粒子最小速度',
+  'Particle Speed Max': '粒子最大速度',
+  'Particle Friction': '粒子阻尼',
+  'Particle Gravity': '粒子重力',
+  'Particle Decay Min': '粒子最小衰减',
+  'Particle Decay Max': '粒子最大衰减',
+  'Particle Trail Length': '粒子拖尾长度',
 };
 
 export function getBackgroundLocalized(

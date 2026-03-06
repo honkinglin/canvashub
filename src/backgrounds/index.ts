@@ -8,6 +8,7 @@ import { fireworksBurstModule } from './fireworksBurst';
 import { starfieldWarpModule } from './starfieldWarp';
 import { orbitTrailsModule } from './orbitTrails';
 import { dotCountdownModule } from './dotCountdown';
+import { classicFireworksModule } from './classicFireworks';
 
 export const backgrounds = [
   confettiModule,
@@ -20,6 +21,7 @@ export const backgrounds = [
   starfieldWarpModule,
   orbitTrailsModule,
   dotCountdownModule,
+  classicFireworksModule,
 ];
 
 export const getBackgroundById = (id: string) => {
