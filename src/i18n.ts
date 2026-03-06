@@ -128,6 +128,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '星际穿梭',
     description: '复古 3D 星空穿梭效果，支持 Warp 拖尾与透视速度调节。',
   },
+  'orbit-trails': {
+    name: '轨道尾迹',
+    description: '围绕鼠标轨道旋转的粒子尾迹，按住可增强扩散半径。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -235,6 +239,13 @@ const zhConfigLabelMap: Record<string, string> = {
   'Star Size': '星点尺寸',
   'Min Opacity': '最小透明度',
   'Max Opacity': '最大透明度',
+  'Orbit Radius': '轨道半径',
+  'Orbit Scale Max': '最大扩散倍率',
+  'Luma Min': '亮度下限',
+  'Luma Max': '亮度上限',
+  'Hue Min': '色相下限',
+  'Hue Max': '色相上限',
+  'Press Boost': '按住增强',
 };
 
 export function getBackgroundLocalized(
