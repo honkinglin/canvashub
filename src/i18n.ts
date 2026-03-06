@@ -132,6 +132,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '轨道尾迹',
     description: '围绕鼠标轨道旋转的粒子尾迹，按住可增强扩散半径。',
   },
+  'dot-countdown': {
+    name: '粒子倒计时',
+    description: '彩色粒子先在空间游走，再聚合成倒计时数字与 GO 文案。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -246,6 +250,17 @@ const zhConfigLabelMap: Record<string, string> = {
   'Hue Min': '色相下限',
   'Hue Max': '色相上限',
   'Press Boost': '按住增强',
+  'Dot Count': '点数量',
+  'Dot Radius': '点半径',
+  'Sample Gap': '采样间隔',
+  'Hold Time': '停留时长',
+  'Step Duration (ms)': '步进时长(ms)',
+  'Move Ease': '移动缓动',
+  'Roam Alpha': '游走透明度',
+  'Form Alpha': '成形透明度',
+  'Start Number': '起始数字',
+  'End Number': '终止数字',
+  'Loop Countdown': '循环倒计时',
 };
 
 export function getBackgroundLocalized(
