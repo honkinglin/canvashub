@@ -156,6 +156,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '暴雨飞溅',
     description: '高性能雨线与水花飞溅效果，支持风向、强度和鼠标交互调节。',
   },
+  'ambient-fireworks': {
+    name: '环境烟花',
+    description: '自动爆发式彩色粒子烟花，带拖尾残影和可配置混合亮度。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -336,6 +340,12 @@ const zhConfigLabelMap: Record<string, string> = {
   Interaction: '交互开关',
   'Pointer Wind': '鼠标风力',
   'Pointer Spawn Boost': '鼠标增雨强度',
+  'Burst Count Jitter': '爆发粒子抖动',
+  'Particle Size Min': '粒子最小尺寸',
+  'Particle Size Max': '粒子最大尺寸',
+  'Burst Margin': '爆发边距',
+  'Color Mode': '颜色模式',
+  'Click Burst': '点击爆发',
 };
 
 export function getBackgroundLocalized(

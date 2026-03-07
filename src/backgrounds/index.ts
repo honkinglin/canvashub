@@ -13,6 +13,7 @@ import { branchLinesModule } from './branchLines';
 import { magicDustModule } from './magicDust';
 import { flowTrianglesModule } from './flowTriangles';
 import { rainShowerModule } from './rainShower';
+import { ambientFireworksModule } from './ambientFireworks';
 
 export const backgrounds = [
   confettiModule,
@@ -30,6 +31,7 @@ export const backgrounds = [
   magicDustModule,
   flowTrianglesModule,
   rainShowerModule,
+  ambientFireworksModule,
 ];
 
 export const getBackgroundById = (id: string) => {
