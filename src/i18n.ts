@@ -160,6 +160,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '环境烟花',
     description: '自动爆发式彩色粒子烟花，带拖尾残影和可配置混合亮度。',
   },
+  'snow-drift': {
+    name: '雪花漂移',
+    description: '轻柔雪花随风下落并带有横向摆动，可开启鼠标风力交互。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -346,6 +350,10 @@ const zhConfigLabelMap: Record<string, string> = {
   'Burst Margin': '爆发边距',
   'Color Mode': '颜色模式',
   'Click Burst': '点击爆发',
+  'Snow Color': '雪花颜色',
+  'Drift Min': '最小横向漂移',
+  'Drift Max': '最大横向漂移',
+  'Sway Amount': '摆动幅度',
 };
 
 export function getBackgroundLocalized(

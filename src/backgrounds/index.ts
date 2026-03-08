@@ -14,6 +14,7 @@ import { magicDustModule } from './magicDust';
 import { flowTrianglesModule } from './flowTriangles';
 import { rainShowerModule } from './rainShower';
 import { ambientFireworksModule } from './ambientFireworks';
+import { snowDriftModule } from './snowDrift';
 
 export const backgrounds = [
   confettiModule,
@@ -32,6 +33,7 @@ export const backgrounds = [
   flowTrianglesModule,
   rainShowerModule,
   ambientFireworksModule,
+  snowDriftModule,
 ];
 
 export const getBackgroundById = (id: string) => {
