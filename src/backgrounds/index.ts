@@ -15,6 +15,7 @@ import { flowTrianglesModule } from './flowTriangles';
 import { rainShowerModule } from './rainShower';
 import { ambientFireworksModule } from './ambientFireworks';
 import { snowDriftModule } from './snowDrift';
+import { pixelFieldModule } from './pixelField';
 
 export const backgrounds = [
   confettiModule,
@@ -34,6 +35,7 @@ export const backgrounds = [
   rainShowerModule,
   ambientFireworksModule,
   snowDriftModule,
+  pixelFieldModule,
 ];
 
 export const getBackgroundById = (id: string) => {

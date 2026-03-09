@@ -164,6 +164,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '雪花漂移',
     description: '轻柔雪花随风下落并带有横向摆动，可开启鼠标风力交互。',
   },
+  'pixel-field': {
+    name: '像素力场网格',
+    description: '高密度像素网格受鼠标力场扰动后回弹，形成丝滑的流体拉扯感。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -354,6 +358,16 @@ const zhConfigLabelMap: Record<string, string> = {
   'Drift Min': '最小横向漂移',
   'Drift Max': '最大横向漂移',
   'Sway Amount': '摆动幅度',
+  Rows: '行数',
+  Cols: '列数',
+  Spacing: '点间距',
+  Margin: '边距',
+  Thickness: '力场范围',
+  Drag: '阻尼',
+  Ease: '回弹速度',
+  'Auto Motion': '自动轨迹',
+  'Motion Scale': '自动轨迹幅度',
+  Interlace: '隔帧渲染',
 };
 
 export function getBackgroundLocalized(
