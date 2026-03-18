@@ -168,6 +168,14 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '像素力场网格',
     description: '高密度像素网格受鼠标力场扰动后回弹，形成丝滑的流体拉扯感。',
   },
+  'pixel-grid-trail': {
+    name: '像素格子尾迹',
+    description: '深色格子被鼠标发射的彩色像素点亮并渐隐，形成电子霓虹拖尾效果。',
+  },
+  'wave-dots': {
+    name: '波动点阵',
+    description: '点阵会随鼠标邻域放大并叠加正弦扰动，形成流动的波纹视觉。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -368,6 +376,13 @@ const zhConfigLabelMap: Record<string, string> = {
   'Auto Motion': '自动轨迹',
   'Motion Scale': '自动轨迹幅度',
   Interlace: '隔帧渲染',
+  'Base Cell Color': '基础网格色',
+  'Dot Color': '点阵颜色',
+  'Max Scale': '最大缩放',
+  'Radius Gain': '半径增益',
+  'Wave Speed': '波动速度',
+  'Wave Amplitude': '波动振幅',
+  'Wave Frequency': '波动频率',
 };
 
 export function getBackgroundLocalized(

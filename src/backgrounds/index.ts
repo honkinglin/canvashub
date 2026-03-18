@@ -16,6 +16,8 @@ import { rainShowerModule } from './rainShower';
 import { ambientFireworksModule } from './ambientFireworks';
 import { snowDriftModule } from './snowDrift';
 import { pixelFieldModule } from './pixelField';
+import { pixelGridTrailModule } from './pixelGridTrail';
+import { waveDotsModule } from './waveDots';
 
 export const backgrounds = [
   confettiModule,
@@ -36,6 +38,8 @@ export const backgrounds = [
   ambientFireworksModule,
   snowDriftModule,
   pixelFieldModule,
+  pixelGridTrailModule,
+  waveDotsModule,
 ];
 
 export const getBackgroundById = (id: string) => {
