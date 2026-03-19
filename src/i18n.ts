@@ -176,6 +176,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '波动点阵',
     description: '点阵会随鼠标邻域放大并叠加正弦扰动，形成流动的波纹视觉。',
   },
+  'bubble-drift': {
+    name: '气泡漂流',
+    description: '发光气泡从底部缓慢上浮，接近鼠标时会柔和避让，氛围轻盈宁静。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -383,6 +387,15 @@ const zhConfigLabelMap: Record<string, string> = {
   'Wave Speed': '波动速度',
   'Wave Amplitude': '波动振幅',
   'Wave Frequency': '波动频率',
+  'Bubble Count': '气泡数量',
+  'Radius Min': '最小半径',
+  'Radius Max': '最大半径',
+  'Repel Radius': '排斥半径',
+  'Repel Strength': '排斥强度',
+  'Core Color': '核心颜色',
+  'Mid Color': '中间颜色',
+  'Edge Color': '边缘颜色',
+  'Outline Alpha': '描边透明度',
 };
 
 export function getBackgroundLocalized(
