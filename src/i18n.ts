@@ -180,6 +180,10 @@ const zhBackgroundText: Record<string, { name: string; description: string }> = 
     name: '气泡漂流',
     description: '发光气泡从底部缓慢上浮，接近鼠标时会柔和避让，氛围轻盈宁静。',
   },
+  'bubble-bounce': {
+    name: '反弹气泡',
+    description: '蓝色描边气泡在屏幕内弹跳，可调节尺寸、速度与拖尾强度，风格简洁干净。',
+  },
 };
 
 const zhConfigLabelMap: Record<string, string> = {
@@ -396,6 +400,9 @@ const zhConfigLabelMap: Record<string, string> = {
   'Mid Color': '中间颜色',
   'Edge Color': '边缘颜色',
   'Outline Alpha': '描边透明度',
+  'Circle Count': '圆圈数量',
+  'Stroke Width': '描边宽度',
+  'Bounce Loss': '反弹损耗',
 };
 
 export function getBackgroundLocalized(

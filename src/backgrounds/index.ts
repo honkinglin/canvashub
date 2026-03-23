@@ -19,6 +19,7 @@ import { pixelFieldModule } from './pixelField';
 import { pixelGridTrailModule } from './pixelGridTrail';
 import { waveDotsModule } from './waveDots';
 import { bubbleDriftModule } from './bubbleDrift';
+import { bubbleBounceModule } from './bubbleBounce';
 
 export const backgrounds = [
   confettiModule,
@@ -42,6 +43,7 @@ export const backgrounds = [
   pixelGridTrailModule,
   waveDotsModule,
   bubbleDriftModule,
+  bubbleBounceModule,
 ];
 
 export const getBackgroundById = (id: string) => {
